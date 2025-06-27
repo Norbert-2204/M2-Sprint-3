@@ -18,7 +18,6 @@ function App() {
       ) : (
         <Register completed={handleCompleted} />
       )}
-      {/* <Submitted /> */}
     </>
   );
 }

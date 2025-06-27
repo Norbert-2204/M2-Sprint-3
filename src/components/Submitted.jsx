@@ -1,46 +1,61 @@
 const Submitted = ({ data }) => {
   const imageUrl = URL.createObjectURL(data.file);
-  console.log(data.skills);
+
   return (
-    <div className="flex flex-col justify-center items-center h-dvh">
-      <h1 className="text-green-700 text-3xl font-bold">Dane z formularza</h1>
-      <div className="flex flex-col  w-96 bg-neutral-800 p-4 rounded justify-center items-start bg gap-2">
-        <div>
-          <h2 className="text-yellow-500 text-xl font-bold">Dane Osobowe</h2>
-          <p>{data.name}</p>
-          <p>{data.surname}</p>
-          <p>{data.email}</p>
-          <p>{data.phone}</p>
+    <div className="p-2 sm:p-4 flex flex-col justify-center items-center min-h-screen">
+      <h1 className="mb-4 text-green-700 text-2xl sm:text-3xl font-bold text-center">
+        Dane z formularza
+      </h1>
+      <div className="flex flex-col gap-4 w-full max-w-[450px] sm:min-w-[350px] min-w-[280px] bg-neutral-800 p-4 rounded-md">
+        <div className="flex flex-col gap-3">
+          <h2 className="text-yellow-500 text-lg sm:text-xl font-bold">
+            Dane Osobowe
+          </h2>
+          <p className="text-sm sm:text-base">{data.name}</p>
+          <p className="text-sm sm:text-base">{data.surname}</p>
+          <p className="text-sm sm:text-base">{data.email}</p>
+          <p className="text-sm sm:text-base">{data.phone}</p>
         </div>
-        <div>
-          <h2 className="text-yellow-500 text-xl font-bold">
+
+        <div className="flex flex-col gap-3">
+          <h2 className="text-yellow-500 text-lg sm:text-xl font-bold">
             Doświadczenie w programowaniu
           </h2>
-          <ul>
-            {data.skills.map((skill, index) => {
-              return (
+          <ul className="list-disc list-inside text-sm sm:text-base">
+            {data.skills.length > 0 ? (
+              data.skills.map((skill, index) => (
                 <li key={index}>
                   {skill.name} {skill.level}
                 </li>
-              );
-            })}
+              ))
+            ) : (
+              <li>Brak Doświadczeń</li>
+            )}
           </ul>
         </div>
-        <div>
-          <h2 className="text-yellow-500 text-xl font-bold">
+
+        <div className="flex flex-col gap-3">
+          <h2 className="text-yellow-500 text-lg sm:text-xl font-bold">
             Preferencje kursu
           </h2>
-          <p>Typ kursu: {data.selected}</p>
-          <p>Preferowane technologie:</p>
+          <p className="text-sm sm:text-base">Typ kursu: {data.selected}</p>
+          <p className="text-sm sm:text-base">Preferowane technologie:</p>
+          <ul className="list-disc list-inside text-sm sm:text-base">
+            {data.languages.map((lang, index) => (
+              <li key={index}>{lang}</li>
+            ))}
+          </ul>
         </div>
-        <div>
-          <h2 className="text-yellow-500 text-xl font-bold">
+
+        <div className="flex flex-col gap-3">
+          <h2 className="text-yellow-500 text-lg sm:text-xl font-bold">
             Curriculum vitae
           </h2>
-          <img className="w-25 h-35" src={imageUrl} alt="cv" />
+          <img className=" w-[100px] h-[150px] " src={imageUrl} alt="cv" />
         </div>
       </div>
     </div>
   );
 };
+
 export default Submitted;
